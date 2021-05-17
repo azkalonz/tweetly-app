@@ -1,0 +1,203 @@
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
+  font-family: "Work Sans", sans-serif;
+  margin: 0;
+  background-color: #ffffff;
+}
+
+.login-layout {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.login-layout .login-container {
+  width: 430px;
+}
+
+.tw-button,
+.tw-input {
+  padding: 13px;
+  border-radius: 7px;
+}
+
+.tw-loader {
+  position: fixed;
+  z-index: 100;
+  background: #ffffff url("/src/assets/loader.svg") no-repeat center;
+  background-size: 100px;
+  bottom: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+}
+
+.tw-button {
+  outline: none;
+  font-weight: 800;
+  font-size: 1rem;
+  background-color: transparent;
+  border: 3px solid transparent;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.tw-button.lg {
+  padding: 20px 30px;
+}
+
+.tw-button.contained {
+  color: #fff;
+  background-color: #cea20e;
+}
+
+.tw-button.outlined {
+  color: #322f2f;
+  border-color: #cea20e;
+}
+
+.tw-input-root .label {
+  -webkit-transform-origin: left;
+          transform-origin: left;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  -webkit-transition: -webkit-transform 0.1s ease-in-out;
+  transition: -webkit-transform 0.1s ease-in-out;
+  transition: transform 0.1s ease-in-out;
+  transition: transform 0.1s ease-in-out, -webkit-transform 0.1s ease-in-out;
+  color: #322f2f;
+  font-weight: 800;
+  display: block;
+  margin-bottom: 13px;
+  pointer-events: none;
+}
+
+.tw-input-root .tw-input {
+  font-size: 1.4rem;
+  display: block;
+  border: 1px solid #f6d156;
+}
+
+.tw-input-root .tw-input.error {
+  border-color: #f61f1f;
+}
+
+.tw-input-root .error-message {
+  font-weight: 500;
+  margin-top: 13px;
+  display: block;
+  color: #f61f1f;
+}
+
+.flex {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.flex.column {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.flex.jcc {
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.flex.jcs {
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+}
+
+.flex.jce {
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
+.flex.jcsb {
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.flex.jcsa {
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+.flex.aic {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.flex.ais {
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+
+.flex.aiss {
+  -webkit-box-align: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch;
+}
+
+.f1 {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  -webkit-transition: opacity 0.5s;
+  transition: opacity 0.5s;
+  position: absolute;
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+
+.slide-leave-active,
+.slide-enter-active {
+  -webkit-transition: 1s;
+  transition: 1s;
+  position: absolute;
+}
+
+.slide-enter {
+  -webkit-transform: translate(100%, 0);
+          transform: translate(100%, 0);
+  opacity: 0;
+}
+
+.slide-leave-to {
+  -webkit-transform: translate(-100%, 0);
+          transform: translate(-100%, 0);
+  opacity: 0;
+}
+/*# sourceMappingURL=style.css.map */
