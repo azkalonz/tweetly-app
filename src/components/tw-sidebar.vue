@@ -1,0 +1,91 @@
+<template>
+  <div class="tw-sidebar-container">
+    <div class="flex jcsb aic">
+      <div>
+        <h3>
+          {{ clientName }}
+        </h3>
+      </div>
+      <div class="flex column aic">
+        <tw-button
+          @click="() => {}"
+          class="contained sm light"
+          style="margin-bottom: 13px"
+        >
+          <tw-icon icon="tweet" />
+        </tw-button>
+        <tw-button @click="logout" class="contained sm light">
+          <tw-icon icon="logout" />
+        </tw-button>
+      </div>
+    </div>
+    <br />
+    <div class="flex w-100">
+      <tw-button class="contained light f1" style="margin-right: 6px">
+        {{ followers }}<br />
+        followers
+      </tw-button>
+      <tw-button class="contained light f1">
+        {{ following }}<br />
+        following
+      </tw-button>
+    </div>
+    <br />
+    <hr />
+    <br />
+    <div class="flex column aiss w-100">
+      <tw-button
+        @click="$store.commit('SET_VISIBLE_POSTS', 'YOURS')"
+        :class="
+          ['f1', 'light']
+            .concat([
+              $store.state.visiblePosts === 'YOURS' ? 'contained' : 'outlined',
+            ])
+            .join(' ')
+        "
+      >
+        Yours
+      </tw-button>
+      <br />
+      <tw-button
+        @click="$store.commit('SET_VISIBLE_POSTS', 'FOLLOWING')"
+        :class="
+          ['f1', 'light']
+            .concat([
+              $store.state.visiblePosts === 'FOLLOWING'
+                ? 'contained'
+                : 'outlined',
+            ])
+            .join(' ')
+        "
+      >
+        Following
+      </tw-button>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  methods: {
+    logout() {
+      this.$store.commit("LOGOUT");
+      this.$router.replace("/login");
+    },
+  },
+  computed: {
+    clientName() {
+      const { firstName, lastName } = this.$store.state.user;
+      return lastName + ", " + firstName;
+    },
+    followers() {
+      const { followers } = this.$store.state.user;
+      return followers || 0;
+    },
+    following() {
+      const { following } = this.$store.state.user;
+      return following || 0;
+    },
+  },
+};
+</script>

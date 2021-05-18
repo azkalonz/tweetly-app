@@ -11,7 +11,12 @@ const routes = [
   {
     path: "/",
     name: "Home",
-    component: Home
+    component: Home,
+    meta: {
+      transition: {
+        name: "slide"
+      }
+    }
   },
   {
     path: "/landing",

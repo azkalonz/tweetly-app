@@ -1,9 +1,11 @@
 $primary: #cea20e;
-$primary-light: #f6d156;
+$primary-light: #f6d568;
+$primary-lighter: #f8e5a3;
+$primary-lightest: #fef9ea;
 $black-0: #000000;
-$black-1: #322f2f;
+$black-1: #312e2e;
 $grey-0: #5f5f5f;
-$grey-1: #9e9e9e;
+$grey-1: #948989;
 $background-color: #ffffff;
 $error: #f61f1f;
 $default-shadow: 0 5px 8px rgba(0, 0, 0, 0.164), 0 0 20px rgba(0, 0, 0, 0.15);
@@ -13,7 +15,7 @@ $default-shadow: 0 5px 8px rgba(0, 0, 0, 0.164), 0 0 20px rgba(0, 0, 0, 0.15);
 }
 
 body {
-  font-family: "Work Sans", sans-serif;
+  font-family: "Poppins", sans-serif;
   margin: 0;
   background-color: $background-color;
 }
@@ -29,10 +31,21 @@ body {
   }
 }
 
+.w-100 {
+  width: 100%;
+}
+
+.h-100 {
+  height: 100%;
+}
+
 .tw-button,
 .tw-input {
   padding: 13px;
   border-radius: 7px;
+  &.sm {
+    padding: 2px 8px;
+  }
 }
 
 .tw-loader {
@@ -61,10 +74,21 @@ body {
   &.contained {
     color: #fff;
     background-color: $primary;
+    &.light {
+      background: $primary-lighter;
+      color: $primary;
+    }
   }
   &.outlined {
     color: $black-1;
     border-color: $primary;
+    &.light {
+      border-color: $primary-lighter;
+      color: $primary;
+    }
+  }
+  &.sm {
+    font-size: 14px;
   }
 }
 
@@ -121,6 +145,10 @@ body {
   &.ais {
     align-items: flex-start;
   }
+
+  &.aie {
+    align-items: flex-end;
+  }
   &.aiss {
     align-items: stretch;
   }
@@ -152,4 +180,67 @@ body {
 .slide-leave-to {
   transform: translate(-100%, 0);
   opacity: 0;
+}
+
+.tw-post-container,
+.tw-create-post-container {
+  border-radius: 7px;
+  background: rgba($primary-lightest, 0.5);
+  border: 0.8px solid $primary-light;
+}
+
+.tw-create-post-container {
+  padding: 14px;
+  min-height: 180px;
+}
+
+.tw-post-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-bottom: 18px;
+  padding: 14px;
+
+  & > section {
+    padding: 30px 0;
+    & .author {
+      color: $primary;
+      font-weight: 800;
+    }
+    & .date {
+      color: $grey-1;
+    }
+  }
+}
+
+hr {
+  border: none;
+  border-bottom: 1px solid $primary-light;
+  width: 100%;
+}
+
+.tw-comment-container {
+  background-color: $primary-lightest;
+  border: 1px solid $primary-lighter;
+  padding: 16px;
+  border-radius: 7px;
+  .author {
+    color: $primary;
+  }
+  .message {
+    color: $grey-1;
+  }
+}
+
+.tw-sidebar-container {
+  min-width: 345px;
+  margin-right: 25px;
+}
+
+h3 {
+  margin: 0;
+}
+
+.grey {
+  color: $grey-1;
 }

@@ -57,21 +57,11 @@
         style: 'width: 100%;',
       }"
     />
-    <tw-input
-      label="Confirm password"
-      :value="confirmPassword"
-      @input="confirmPassword = $event"
-      :error="errors.confirmPassword"
-      :parentProps="{
-        style: 'margin-bottom: 40px;',
-      }"
-      :props="{
-        class: 'f1',
-        type: 'password',
-        style: 'width: 100%;',
-      }"
-    />
-    <tw-button class="contained f1" @click="null" style="margin-bottom: 40px">
+    <tw-button
+      class="contained f1"
+      @click="reigster"
+      style="margin-bottom: 40px"
+    >
       Create Account
     </tw-button>
     <tw-button class="outlined f1" @click="$router.push('/login')">
@@ -88,42 +78,26 @@ export default {
       lastName: "",
       email: "",
       password: "",
-      confirmPassword: "",
       errors: {},
     };
   },
   methods: {
-    login() {
+    reigster() {
       const user = {
+        firstName: this.firstName,
+        lastName: this.lastName,
         email: this.email,
         password: this.password,
       };
-      this.$store.commit("TOGGLE_LOADING");
       this.errors = {};
-
-      if (!validateEmail(user.email)) {
-        this.errors.email = {
-          message: "Invalid email address",
-        };
-      }
-      if (!this.password.length) {
-        this.errors.password = {
-          message: "Invalid password",
-        };
-      }
-      if (!Object.keys(this.errors).length)
-        setTimeout(() => {
-          this.errors = {};
-          this.$store.commit("SET_USER", {
-            email: this.email,
-            password: this.password,
-          });
+      this.$store.dispatch("REGISTER", user).then(({ errors = null }) => {
+        if (errors) {
+          this.errors = errors;
+          return;
+        } else {
           this.$router.replace("/");
-          this.$store.commit("TOGGLE_LOADING");
-        }, 2000);
-      else {
-        this.$store.commit("TOGGLE_LOADING");
-      }
+        }
+      });
     },
   },
 };

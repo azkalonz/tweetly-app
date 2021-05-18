@@ -1,7 +1,17 @@
 import DefaultLayout from "./DefaultLayout";
 import LoginLayout from "./LoginLayout";
 
-const components = ["tw-button", "tw-input", "tw-loader", "tw-nav"];
+const components = [
+  "tw-button",
+  "tw-input",
+  "tw-loader",
+  "tw-nav",
+  "tw-posts",
+  "tw-icon",
+  "tw-comment",
+  "tw-sidebar",
+  "tw-create-post"
+];
 
 export default {
   install: function(Vue, options) {

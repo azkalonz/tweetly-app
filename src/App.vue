@@ -17,7 +17,7 @@ export default {
   mounted: function () {
     this.changePageTitle();
     if (_.isNil(this.$store.state.user)) {
-      this.$router.replace("/landing");
+      if (this.$route.path !== "/landing") this.$router.replace("/landing");
       this.$store.commit("SET_LOADING", false);
     } else if (this.$route.path !== "/") {
       this.$router.replace("/");

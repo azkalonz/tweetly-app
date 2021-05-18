@@ -6,7 +6,9 @@ import store from "./store";
 import VueLodash from "vue-lodash";
 import lodash from "lodash";
 import tweetlyComponents from "./layouts";
+import moment from "moment";
 
+Vue.prototype.moment = moment;
 Vue.use(VueLodash, { name: "custom", lodash: lodash });
 Vue.use(tweetlyComponents);
 
