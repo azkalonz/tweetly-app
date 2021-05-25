@@ -11,7 +11,8 @@ const components = [
   "tw-comment",
   "tw-sidebar",
   "tw-create-post",
-  "tw-tweet-input"
+  "tw-tweet-input",
+  "tw-comment-input"
 ];
 
 export default {

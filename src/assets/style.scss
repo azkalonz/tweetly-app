@@ -234,6 +234,13 @@ hr {
   border: 1px solid $primary-lighter;
   padding: 16px;
   border-radius: 7px;
+  margin-bottom: 10px;
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+  .date {
+    color: $grey-0;
+  }
   .author {
     color: $primary;
   }
@@ -256,4 +263,15 @@ hr {
   padding: 8px;
   word-break: break-all;
   outline: 1px solid $primary;
+}
+
+.tw-comment-input {
+  background-color: $primary-lightest;
+  border: 1px solid $primary-light;
+  padding: 12px;
+  border-radius: 8px;
+  outline: none;
+  &:focus {
+    border: 1px solid $primary;
+  }
 }

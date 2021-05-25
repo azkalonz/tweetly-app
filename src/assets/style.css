@@ -293,6 +293,15 @@ hr {
   border: 1px solid #f8e5a3;
   padding: 16px;
   border-radius: 7px;
+  margin-bottom: 10px;
+}
+
+.tw-comment-container:last-of-type {
+  margin-bottom: 0;
+}
+
+.tw-comment-container .date {
+  color: #5f5f5f;
 }
 
 .tw-comment-container .author {
@@ -317,5 +326,17 @@ hr {
   padding: 8px;
   word-break: break-all;
   outline: 1px solid #cea20e;
+}
+
+.tw-comment-input {
+  background-color: #fef9ea;
+  border: 1px solid #f6d568;
+  padding: 12px;
+  border-radius: 8px;
+  outline: none;
+}
+
+.tw-comment-input:focus {
+  border: 1px solid #cea20e;
 }
 /*# sourceMappingURL=style.css.map */

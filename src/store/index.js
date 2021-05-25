@@ -34,6 +34,12 @@ const store = new Vuex.Store({
     },
     ADD_POST(state, post) {
       state.posts.unshift(post);
+    },
+    ADD_COMMENT(state, { post_id, comment }) {
+      const index = state.posts.findIndex(q => q.id === post_id);
+      if (index >= 0) {
+        state.posts[index].comments.push(comment);
+      }
     }
   },
   actions: {
@@ -45,6 +51,24 @@ const store = new Vuex.Store({
             state.posts.splice(index, 1);
           }
         });
+      }
+    },
+    DELETE_COMMENT({ state }, { postId, comment }) {
+      if (comment && comment.id) {
+        axios
+          .delete(`/delete-comment/${comment.id}?post_id=${postId}`)
+          .then(({ data }) => {
+            if (data === "Success") {
+              const postIndex = _.findIndex(state.posts, { id: postId });
+              const commentIndex = _.findIndex(
+                state.posts[postIndex].comments,
+                { id: comment.id }
+              );
+              if (commentIndex >= 0) {
+                state.posts[postIndex].comments.splice(commentIndex, 1);
+              }
+            }
+          });
       }
     },
     GET_POSTS({ state }, callback = data => {}) {

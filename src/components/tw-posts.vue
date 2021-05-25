@@ -41,22 +41,73 @@
         >
       </section>
       <hr />
-      <section>
+      <section style="max-height: 300px; overflow-y: auto">
         <tw-comment
-          v-for="comment in post.comments"
+          v-for="comment in post.comments.reverse()"
           :key="comment.id"
-          :message="comment.message"
-          :author="comment.author"
+          :comment="comment"
+          :postId="post.id"
         />
       </section>
+      <div class="flex aic">
+        <tw-comment-input style="width: 100%" :id="post.id" />
+        &nbsp;&nbsp;
+        <tw-button class="contained" @click="comment(post.id)"
+          >Comment</tw-button
+        >
+      </div>
     </article>
   </div>
 </template>
 
 <script>
+import twButton from "./tw-button.vue";
+import axios from "../utils/axios";
+import moment from "moment";
+
 export default {
+  data() {
+    return {
+      postFetched: false,
+    };
+  },
+  components: { twButton },
   mounted: function () {
-    this.$store.dispatch("GET_POSTS");
+    if (!this.postFetched) {
+      this.$store.dispatch("GET_POSTS");
+      this.postFetched = true;
+    }
+  },
+  methods: {
+    comment(post_id) {
+      const input = document.querySelector(`#comment-input-${post_id}`);
+      if (input) {
+        const message = input.innerHTML;
+        axios
+          .post(
+            "/add-comment",
+            {
+              client_id: this.$store.state.user.id,
+              message,
+              post_id,
+              date: moment(),
+            },
+            {
+              headers: {
+                "Content-Type": "application/json",
+              },
+            }
+          )
+          .then(({ data }) => {
+            this.$store.commit("ADD_COMMENT", {
+              post_id,
+              comment: data,
+            });
+            input.innerHTML = "";
+            input.unfocus();
+          });
+      }
+    },
   },
   computed: {
     posts() {
@@ -64,7 +115,6 @@ export default {
         visiblePosts,
         user: { id },
       } = this.$store.state;
-      console.log(visiblePosts, id);
       return this.$store.state.posts
         .filter((q) =>
           visiblePosts === "YOURS" ? q.author.id === id : q.author.id !== id
