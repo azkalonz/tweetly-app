@@ -39,6 +39,79 @@ body {
   height: 100%;
 }
 
+.flex {
+  display: flex;
+  &.column {
+    flex-direction: column;
+  }
+  &.jcc {
+    justify-content: center;
+  }
+  &.jcs {
+    justify-content: flex-start;
+  }
+  &.jce {
+    justify-content: flex-end;
+  }
+  &.jcsb {
+    justify-content: space-between;
+  }
+  &.jcsa {
+    justify-content: space-around;
+  }
+  &.aic {
+    align-items: center;
+  }
+  &.ais {
+    align-items: flex-start;
+  }
+
+  &.aie {
+    align-items: flex-end;
+  }
+  &.aiss {
+    align-items: stretch;
+  }
+}
+
+.f1 {
+  flex: 1;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+  position: absolute;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+
+.slide-leave-active,
+.slide-enter-active {
+  transition: 1s;
+  position: absolute;
+}
+.slide-enter {
+  transform: translate(100%, 0);
+  opacity: 0;
+}
+.slide-leave-to {
+  transform: translate(-100%, 0);
+  opacity: 0;
+}
+
+h3 {
+  margin: 0;
+}
+
+.grey {
+  color: $grey-1;
+}
+
+// TWEETLY COMPONENTS
+
 .tw-button,
 .tw-input {
   padding: 13px;
@@ -119,69 +192,6 @@ body {
   }
 }
 
-.flex {
-  display: flex;
-  &.column {
-    flex-direction: column;
-  }
-  &.jcc {
-    justify-content: center;
-  }
-  &.jcs {
-    justify-content: flex-start;
-  }
-  &.jce {
-    justify-content: flex-end;
-  }
-  &.jcsb {
-    justify-content: space-between;
-  }
-  &.jcsa {
-    justify-content: space-around;
-  }
-  &.aic {
-    align-items: center;
-  }
-  &.ais {
-    align-items: flex-start;
-  }
-
-  &.aie {
-    align-items: flex-end;
-  }
-  &.aiss {
-    align-items: stretch;
-  }
-}
-
-.f1 {
-  flex: 1;
-}
-
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s;
-  position: absolute;
-}
-.fade-enter,
-.fade-leave-to {
-  opacity: 0;
-}
-
-.slide-leave-active,
-.slide-enter-active {
-  transition: 1s;
-  position: absolute;
-}
-.slide-enter {
-  transform: translate(100%, 0);
-  opacity: 0;
-}
-.slide-leave-to {
-  transform: translate(-100%, 0);
-  opacity: 0;
-}
-
 .tw-post-container,
 .tw-create-post-container {
   border-radius: 7px;
@@ -237,10 +247,13 @@ hr {
   margin-right: 25px;
 }
 
-h3 {
-  margin: 0;
-}
-
-.grey {
-  color: $grey-1;
+.tw-tweet-input {
+  background-color: #fff;
+  border: 1px solid $primary-light;
+  width: 100%;
+  min-height: 80px;
+  margin-bottom: 8px;
+  padding: 8px;
+  word-break: break-all;
+  outline: 1px solid $primary;
 }

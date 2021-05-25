@@ -13,7 +13,8 @@ const store = new Vuex.Store({
     user: null,
     isLoading: false,
     visiblePosts: "FOLLOWING",
-    posts: []
+    posts: [],
+    isTweeting: false
   },
   mutations: {
     SET_LOADING(state, status) {
@@ -27,6 +28,12 @@ const store = new Vuex.Store({
     },
     LOGOUT(state) {
       state.user = null;
+    },
+    SET_IS_TWEETING(state, status) {
+      state.isTweeting = status;
+    },
+    ADD_POST(state, post) {
+      state.posts.unshift(post);
     }
   },
   actions: {
@@ -42,7 +49,7 @@ const store = new Vuex.Store({
     },
     GET_POSTS({ state }, callback = data => {}) {
       axios.get("/posts").then(({ data }) => {
-        if (data && data.length) state.posts = data;
+        state.posts = data.reverse();
         callback(data);
       });
     },

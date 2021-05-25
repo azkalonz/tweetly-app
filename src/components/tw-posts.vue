@@ -7,7 +7,7 @@
       <section class="flex jcsb w-100">
         <div>
           <a class="author">{{ post.author.name }}</a>
-          <span class="date">{{ moment(post.date).format("LL") }}</span>
+          <span class="date">{{ moment(post.date).fromNow() }}</span>
         </div>
         <tw-button
           v-if="post.author.id == $store.state.user.id"
@@ -22,9 +22,7 @@
           >Report</tw-button
         >
       </section>
-      <main>
-        {{ post.message }}
-      </main>
+      <main v-html="post.message" />
       <section class="flex aic">
         <tw-button
           v-if="post.author.id != $store.state.user.id"

@@ -10,7 +10,8 @@ const components = [
   "tw-icon",
   "tw-comment",
   "tw-sidebar",
-  "tw-create-post"
+  "tw-create-post",
+  "tw-tweet-input"
 ];
 
 export default {

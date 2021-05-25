@@ -35,102 +35,6 @@ body {
   height: 100%;
 }
 
-.tw-button,
-.tw-input {
-  padding: 13px;
-  border-radius: 7px;
-}
-
-.tw-button.sm,
-.tw-input.sm {
-  padding: 2px 8px;
-}
-
-.tw-loader {
-  position: fixed;
-  z-index: 100;
-  background: #ffffff url("/src/assets/loader.svg") no-repeat center;
-  background-size: 100px;
-  bottom: 0;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  left: 0;
-}
-
-.tw-button {
-  outline: none;
-  font-weight: 800;
-  font-size: 1rem;
-  background-color: transparent;
-  border: 3px solid transparent;
-  cursor: pointer;
-  white-space: nowrap;
-}
-
-.tw-button.lg {
-  padding: 20px 30px;
-}
-
-.tw-button.contained {
-  color: #fff;
-  background-color: #cea20e;
-}
-
-.tw-button.contained.light {
-  background: #f8e5a3;
-  color: #cea20e;
-}
-
-.tw-button.outlined {
-  color: #312e2e;
-  border-color: #cea20e;
-}
-
-.tw-button.outlined.light {
-  border-color: #f8e5a3;
-  color: #cea20e;
-}
-
-.tw-button.sm {
-  font-size: 14px;
-}
-
-.tw-input-root .label {
-  -webkit-transform-origin: left;
-          transform-origin: left;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
-  -webkit-transition: -webkit-transform 0.1s ease-in-out;
-  transition: -webkit-transform 0.1s ease-in-out;
-  transition: transform 0.1s ease-in-out;
-  transition: transform 0.1s ease-in-out, -webkit-transform 0.1s ease-in-out;
-  color: #312e2e;
-  font-weight: 800;
-  display: block;
-  margin-bottom: 13px;
-  pointer-events: none;
-}
-
-.tw-input-root .tw-input {
-  font-size: 1.4rem;
-  display: block;
-  border: 1px solid #f6d568;
-}
-
-.tw-input-root .tw-input.error {
-  border-color: #f61f1f;
-}
-
-.tw-input-root .error-message {
-  font-weight: 500;
-  margin-top: 13px;
-  display: block;
-  color: #f61f1f;
-}
-
 .flex {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -234,6 +138,110 @@ body {
   opacity: 0;
 }
 
+h3 {
+  margin: 0;
+}
+
+.grey {
+  color: #948989;
+}
+
+.tw-button,
+.tw-input {
+  padding: 13px;
+  border-radius: 7px;
+}
+
+.tw-button.sm,
+.tw-input.sm {
+  padding: 2px 8px;
+}
+
+.tw-loader {
+  position: fixed;
+  z-index: 100;
+  background: #ffffff url("/src/assets/loader.svg") no-repeat center;
+  background-size: 100px;
+  bottom: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+}
+
+.tw-button {
+  outline: none;
+  font-weight: 800;
+  font-size: 1rem;
+  background-color: transparent;
+  border: 3px solid transparent;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.tw-button.lg {
+  padding: 20px 30px;
+}
+
+.tw-button.contained {
+  color: #fff;
+  background-color: #cea20e;
+}
+
+.tw-button.contained.light {
+  background: #f8e5a3;
+  color: #cea20e;
+}
+
+.tw-button.outlined {
+  color: #312e2e;
+  border-color: #cea20e;
+}
+
+.tw-button.outlined.light {
+  border-color: #f8e5a3;
+  color: #cea20e;
+}
+
+.tw-button.sm {
+  font-size: 14px;
+}
+
+.tw-input-root .label {
+  -webkit-transform-origin: left;
+          transform-origin: left;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  -webkit-transition: -webkit-transform 0.1s ease-in-out;
+  transition: -webkit-transform 0.1s ease-in-out;
+  transition: transform 0.1s ease-in-out;
+  transition: transform 0.1s ease-in-out, -webkit-transform 0.1s ease-in-out;
+  color: #312e2e;
+  font-weight: 800;
+  display: block;
+  margin-bottom: 13px;
+  pointer-events: none;
+}
+
+.tw-input-root .tw-input {
+  font-size: 1.4rem;
+  display: block;
+  border: 1px solid #f6d568;
+}
+
+.tw-input-root .tw-input.error {
+  border-color: #f61f1f;
+}
+
+.tw-input-root .error-message {
+  font-weight: 500;
+  margin-top: 13px;
+  display: block;
+  color: #f61f1f;
+}
+
 .tw-post-container,
 .tw-create-post-container {
   border-radius: 7px;
@@ -300,11 +308,14 @@ hr {
   margin-right: 25px;
 }
 
-h3 {
-  margin: 0;
-}
-
-.grey {
-  color: #948989;
+.tw-tweet-input {
+  background-color: #fff;
+  border: 1px solid #f6d568;
+  width: 100%;
+  min-height: 80px;
+  margin-bottom: 8px;
+  padding: 8px;
+  word-break: break-all;
+  outline: 1px solid #cea20e;
 }
 /*# sourceMappingURL=style.css.map */
