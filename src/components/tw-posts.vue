@@ -11,13 +11,12 @@
         </div>
         <tw-button
           v-if="post.author.id == $store.state.user.id"
-          @click="$store.dispatch('DELETE_POST', post)"
+          @click="deletePost(post)"
           class="contained sm light"
           >Delete</tw-button
         >
         <tw-button
           v-if="post.author.id != $store.state.user.id"
-          @click="alert()"
           class="contained sm light"
           >Report</tw-button
         >
@@ -25,16 +24,12 @@
       <main v-html="post.message" />
       <section class="flex aic">
         <tw-button
-          v-if="post.author.id != $store.state.user.id"
-          @click="alert()"
+          @click="likePost(post.id)"
           class="outlined light f1"
           style="margin-right: 10px"
           ><tw-icon icon="likes" />&nbsp; {{ post.likes }}</tw-button
         >
-        <tw-button
-          v-if="post.author.id != $store.state.user.id"
-          @click="alert()"
-          class="outlined light f1"
+        <tw-button class="outlined light f1"
           ><tw-icon icon="comments" />&nbsp;{{
             post.comments.length
           }}</tw-button
@@ -61,24 +56,46 @@
 </template>
 
 <script>
-import twButton from "./tw-button.vue";
 import axios from "../utils/axios";
 import moment from "moment";
 
 export default {
+  props: ["visible"],
   data() {
     return {
       postFetched: false,
+      posts: [],
+      originalPosts: [],
     };
   },
-  components: { twButton },
   mounted: function () {
-    if (!this.postFetched) {
-      this.$store.dispatch("GET_POSTS");
-      this.postFetched = true;
-    }
+    this.$store.dispatch("GET_POSTS");
+  },
+  watch: {
+    "$store.state.posts": function (posts) {
+      this.originalPosts = posts;
+    },
+    visible: function (val) {
+      this.posts = this.originalPosts.filter((q) =>
+        val === "YOURS"
+          ? q.author.id === this.$store.state.user.id
+          : this.$store.state.user.following.findIndex(
+              (qq) => qq.id === q.author.id
+            ) >= 0
+      );
+    },
   },
   methods: {
+    deletePost(post) {
+      this.$store.dispatch("DELETE_POST", post);
+    },
+    likePost(post_id) {
+      axios.post("/like-post/" + post_id).then(({ data }) => {
+        if (data === "Success") {
+          this.$store.commit("INCREMENT_LIKES", post_id);
+        }
+      });
+    },
     comment(post_id) {
       const input = document.querySelector(`#comment-input-${post_id}`);
       if (input) {
@@ -107,25 +124,6 @@ export default {
             input.unfocus();
           });
       }
-    },
-  },
-  computed: {
-    posts() {
-      const {
-        visiblePosts,
-        user: { id },
-      } = this.$store.state;
-      return this.$store.state.posts
-        .filter((q) =>
-          visiblePosts === "YOURS" ? q.author.id === id : q.author.id !== id
-        )
-        .map((q) => ({
-          ...q,
-          author: {
-            ...q.author,
-            name: q.author.lastName + ", " + q.author.firstName,
-          },
-        }));
     },
   },
 };

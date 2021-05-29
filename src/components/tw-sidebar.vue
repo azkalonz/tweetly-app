@@ -7,11 +7,7 @@
         </h3>
       </div>
       <div class="flex column aic">
-        <tw-button
-          @click="() => {}"
-          class="contained sm light"
-          style="margin-bottom: 13px"
-        >
+        <tw-button class="contained sm light" style="margin-bottom: 13px">
           <tw-icon icon="tweet" />
         </tw-button>
         <tw-button @click="logout" class="contained sm light">
@@ -35,7 +31,7 @@
     <br />
     <div class="flex column aiss w-100">
       <tw-button
-        @click="$store.commit('SET_VISIBLE_POSTS', 'YOURS')"
+        @click="yours"
         :class="
           ['f1', 'light']
             .concat([
@@ -48,7 +44,7 @@
       </tw-button>
       <br />
       <tw-button
-        @click="$store.commit('SET_VISIBLE_POSTS', 'FOLLOWING')"
+        @click="notYours"
         :class="
           ['f1', 'light']
             .concat([
@@ -72,6 +68,12 @@ export default {
       this.$store.commit("LOGOUT");
       this.$router.replace("/login");
     },
+    yours() {
+      this.$store.commit("SET_VISIBLE_POSTS", "YOURS");
+    },
+    notYours() {
+      this.$store.commit("SET_VISIBLE_POSTS", "FOLLOWING");
+    },
   },
   computed: {
     clientName() {
@@ -80,11 +82,11 @@ export default {
     },
     followers() {
       const { followers } = this.$store.state.user;
-      return followers || 0;
+      return (followers && followers.length) || 0;
     },
     following() {
       const { following } = this.$store.state.user;
-      return following || 0;
+      return (following && following.length) || 0;
     },
   },
 };

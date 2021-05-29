@@ -6,9 +6,15 @@
       <div class="f1">
         <tw-create-post />
         <br />
-        <tw-posts />
+        <tw-posts
+          visible="YOURS"
+          v-if="$store.state.visiblePosts === 'YOURS'"
+        />
+        <tw-posts
+          visible="FOLLOWING"
+          v-if="$store.state.visiblePosts === 'FOLLOWING'"
+        />
       </div>
     </div>
   </div>
 </template>
-

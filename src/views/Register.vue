@@ -59,7 +59,7 @@
     />
     <tw-button
       class="contained f1"
-      @click="reigster"
+      @click="register"
       style="margin-bottom: 40px"
     >
       Create Account
@@ -82,7 +82,7 @@ export default {
     };
   },
   methods: {
-    reigster() {
+    register() {
       const user = {
         firstName: this.firstName,
         lastName: this.lastName,

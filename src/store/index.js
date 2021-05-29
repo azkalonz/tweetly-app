@@ -40,6 +40,13 @@ const store = new Vuex.Store({
       if (index >= 0) {
         state.posts[index].comments.push(comment);
       }
+    },
+    INCREMENT_LIKES(state, post_id) {
+      const index = state.posts.findIndex(q => q.id === post_id);
+      console.log(index);
+      if (index >= 0) {
+        state.posts[index].likes += 1;
+      }
     }
   },
   actions: {
@@ -74,7 +81,15 @@ const store = new Vuex.Store({
     GET_POSTS({ state }, callback = data => {}) {
       axios.get("/posts").then(({ data }) => {
         state.posts = data.reverse();
-        callback(data);
+        callback(
+          data.map(q => ({
+            ...q,
+            author: {
+              ...q.author,
+              name: q.author.firstName + " " + q.author.lastName
+            }
+          }))
+        );
       });
     },
     REGISTER({ commit }, user) {
