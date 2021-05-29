@@ -1,6 +1,6 @@
 <template>
   <div class="tw-comment-container">
-    <b class="author">{{ authorName }}</b
+    <b class="author" @click="visitProfile">{{ authorName }}</b
     >&nbsp;<a class="date">{{ moment(comment.date).fromNow() }}</a>
     <tw-button
       v-if="comment.author.id == $store.state.user.id"
@@ -26,6 +26,11 @@ export default {
   computed: {
     authorName() {
       return this.comment.author.firstName + " " + this.comment.author.lastName;
+    },
+  },
+  methods: {
+    visitProfile() {
+      this.$router.push("/profile/" + this.comment.author.id);
     },
   },
 };

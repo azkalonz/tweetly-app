@@ -81,7 +81,6 @@ body {
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.5s;
-  position: absolute;
 }
 .fade-enter,
 .fade-leave-to {
@@ -274,4 +273,21 @@ hr {
   &:focus {
     border: 1px solid $primary;
   }
+}
+
+.tw-client-card {
+  background-color: $primary-lightest;
+  border: 1px solid $primary-lighter;
+  padding: 50px 34px;
+  border-radius: 7px;
+  margin-bottom: 10px;
+  .name {
+    span {
+      color: $grey-0;
+    }
+  }
+}
+
+a {
+  cursor: pointer;
 }

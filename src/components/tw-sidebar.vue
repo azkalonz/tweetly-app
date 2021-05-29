@@ -57,6 +57,19 @@
       >
         Following
       </tw-button>
+      <br />
+      <tw-button
+        @click="all"
+        :class="
+          ['f1', 'light']
+            .concat([
+              $store.state.visiblePosts === 'ALL' ? 'contained' : 'outlined',
+            ])
+            .join(' ')
+        "
+      >
+        EVERYONE
+      </tw-button>
     </div>
   </div>
 </template>
@@ -69,10 +82,16 @@ export default {
       this.$router.replace("/login");
     },
     yours() {
+      this.$router.push("/");
       this.$store.commit("SET_VISIBLE_POSTS", "YOURS");
     },
     notYours() {
+      this.$router.push("/");
       this.$store.commit("SET_VISIBLE_POSTS", "FOLLOWING");
+    },
+    all() {
+      this.$router.push("/");
+      this.$store.commit("SET_VISIBLE_POSTS", "ALL");
     },
   },
   computed: {
@@ -82,11 +101,23 @@ export default {
     },
     followers() {
       const { followers } = this.$store.state.user;
-      return (followers && followers.length) || 0;
+      return (
+        (followers &&
+          _.uniqBy(followers, function (e) {
+            return e.id;
+          }).length) ||
+        0
+      );
     },
     following() {
       const { following } = this.$store.state.user;
-      return (following && following.length) || 0;
+      return (
+        (following &&
+          _.uniqBy(following, function (e) {
+            return e.id;
+          }).length) ||
+        0
+      );
     },
   },
 };

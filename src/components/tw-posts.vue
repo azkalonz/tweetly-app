@@ -6,7 +6,9 @@
     <article class="tw-post-container" v-for="post in posts" :key="post.id">
       <section class="flex jcsb w-100">
         <div>
-          <a class="author">{{ post.author.name }}</a>
+          <a @click="visitProfile(post.author.id)" class="author">{{
+            post.author.firstName + " " + post.author.lastName
+          }}</a>
           <span class="date">{{ moment(post.date).fromNow() }}</span>
         </div>
         <tw-button
@@ -60,7 +62,15 @@ import axios from "../utils/axios";
 import moment from "moment";
 
 export default {
-  props: ["visible"],
+  props: {
+    visible: {
+      required: true,
+      default: "YOURS",
+    },
+    profileId: {
+      required: false,
+    },
+  },
   data() {
     return {
       postFetched: false,
@@ -74,18 +84,36 @@ export default {
   watch: {
     "$store.state.posts": function (posts) {
       this.originalPosts = posts;
+      if (!_.isNil(this.profileId)) {
+        this.posts = this.filterPosts("PROFILE", posts);
+      } else {
+        this.posts = this.filterPosts(this.visible, posts);
+      }
     },
-    visible: function (val) {
-      this.posts = this.originalPosts.filter((q) =>
-        val === "YOURS"
-          ? q.author.id === this.$store.state.user.id
-          : this.$store.state.user.following.findIndex(
-              (qq) => qq.id === q.author.id
-            ) >= 0
-      );
+    visible: function (visible) {
+      this.posts = this.filterPosts(visible);
     },
   },
   methods: {
+    visitProfile(id) {
+      this.$router.push("/profile/" + id);
+    },
+    filterPosts(visible, posts) {
+      if (!posts) {
+        posts = this.originalPosts;
+      }
+      return this.originalPosts.filter((q) =>
+        visible === "YOURS"
+          ? q.author.id === this.$store.state.user.id
+          : visible === "FOLLOWING"
+          ? this.$store.state.user.following.findIndex(
+              (qq) => qq.id === q.author.id
+            ) >= 0
+          : visible === "ALL"
+          ? true
+          : this.profileId === q.author.id
+      );
+    },
     deletePost(post) {
       this.$store.dispatch("DELETE_POST", post);
     },

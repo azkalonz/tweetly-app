@@ -19,7 +19,10 @@ export default {
     if (_.isNil(this.$store.state.user)) {
       if (this.$route.path !== "/landing") this.$router.replace("/landing");
       this.$store.commit("SET_LOADING", false);
-    } else if (this.$route.path !== "/") {
+    } else if (
+      this.$route.path === "/landing" ||
+      this.$route.path === "/login"
+    ) {
       this.$router.replace("/");
     }
   },

@@ -111,7 +111,6 @@ body {
 .fade-leave-active {
   -webkit-transition: opacity 0.5s;
   transition: opacity 0.5s;
-  position: absolute;
 }
 
 .fade-enter,
@@ -338,5 +337,21 @@ hr {
 
 .tw-comment-input:focus {
   border: 1px solid #cea20e;
+}
+
+.tw-client-card {
+  background-color: #fef9ea;
+  border: 1px solid #f8e5a3;
+  padding: 50px 34px;
+  border-radius: 7px;
+  margin-bottom: 10px;
+}
+
+.tw-client-card .name span {
+  color: #5f5f5f;
+}
+
+a {
+  cursor: pointer;
 }
 /*# sourceMappingURL=style.css.map */

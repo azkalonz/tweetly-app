@@ -47,6 +47,15 @@ const store = new Vuex.Store({
       if (index >= 0) {
         state.posts[index].likes += 1;
       }
+    },
+    FOLLOW(state, client) {
+      state.user.following.push(client);
+    },
+    UNFOLLOW(state, client) {
+      const index = state.user.following.findIndex(q => q.id === client.id);
+      if (index >= 0) {
+        state.user.following.splice(index, 1);
+      }
     }
   },
   actions: {
