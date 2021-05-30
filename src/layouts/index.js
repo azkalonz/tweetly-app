@@ -13,7 +13,9 @@ const components = [
   "tw-create-post",
   "tw-tweet-input",
   "tw-comment-input",
-  "tw-client-card"
+  "tw-client-card",
+  "tw-modal",
+  "tw-report"
 ];
 
 export default {

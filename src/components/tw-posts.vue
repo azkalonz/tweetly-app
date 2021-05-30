@@ -20,6 +20,7 @@
         <tw-button
           v-if="post.author.id != $store.state.user.id"
           class="contained sm light"
+          @click="report(post)"
           >Report</tw-button
         >
       </section>
@@ -95,6 +96,22 @@ export default {
     },
   },
   methods: {
+    report(post) {
+      this.$store.commit("OPEN_MODAL", {
+        title: `Report ${post.author.firstName}'s post`,
+        action: {
+          label: "Report",
+          onClick: ({ close }) => {
+            axios
+              .post(`/report-post/${post.id}/${this.$store.state.user.id}`)
+              .then(({ data }) => {
+                alert(data);
+                close();
+              });
+          },
+        },
+      });
+    },
     visitProfile(id) {
       this.$router.push("/profile/" + id);
     },
@@ -115,7 +132,16 @@ export default {
       );
     },
     deletePost(post) {
-      this.$store.dispatch("DELETE_POST", post);
+      this.$store.commit("OPEN_MODAL", {
+        title: "Are you sure you want to delete your tweet?",
+        action: {
+          label: "Delete",
+          onClick: ({ close }) => {
+            this.$store.dispatch("DELETE_POST", post);
+            close();
+          },
+        },
+      });
     },
     likePost(post_id) {
       axios.post("/like-post/" + post_id).then(({ data }) => {

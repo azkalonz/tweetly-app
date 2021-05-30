@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <tw-loader />
+    <tw-modal v-if="$store.state.modal.isOpen" />
     <component :is="layout">
       <transition
         :name="transition.name"

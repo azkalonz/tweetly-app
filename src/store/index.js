@@ -14,9 +14,16 @@ const store = new Vuex.Store({
     isLoading: false,
     visiblePosts: "FOLLOWING",
     posts: [],
-    isTweeting: false
+    isTweeting: false,
+    modal: { isOpen: false }
   },
   mutations: {
+    OPEN_MODAL(state, meta) {
+      state.modal = { ...meta, isOpen: true };
+    },
+    CLOSE_MODAL(state) {
+      state.modal.isOpen = false;
+    },
     SET_LOADING(state, status) {
       state.isLoading = status;
     },

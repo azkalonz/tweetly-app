@@ -8,6 +8,7 @@ import Profile from "../views/Profile.vue";
 import Account from "../views/Account.vue";
 import Follow from "../views/Follow.vue";
 import Followers from "../views/Followers.vue";
+import Reports from "../views/Reports.vue";
 
 Vue.use(VueRouter);
 
@@ -26,6 +27,16 @@ const routes = [
     path: "/profile/:id",
     name: "Profile",
     component: Profile,
+    meta: {
+      transition: {
+        name: "fade"
+      }
+    }
+  },
+  {
+    path: "/reports",
+    name: "Reports",
+    component: Reports,
     meta: {
       transition: {
         name: "fade"

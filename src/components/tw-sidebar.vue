@@ -39,6 +39,14 @@
     <br />
     <div class="flex column aiss w-100">
       <tw-button
+        v-if="$store.state.user.role === 'MODERATOR'"
+        @click="$router.push('/reports')"
+        class="contained"
+      >
+        REPORTS
+      </tw-button>
+      <br />
+      <tw-button
         @click="yours"
         :class="
           ['f1', 'light']
