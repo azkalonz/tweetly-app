@@ -7,7 +7,11 @@
         </h3>
       </div>
       <div class="flex column aic">
-        <tw-button class="contained sm light" style="margin-bottom: 13px">
+        <tw-button
+          class="contained sm light"
+          style="margin-bottom: 13px"
+          @click="$router.push('/account')"
+        >
           <tw-icon icon="tweet" />
         </tw-button>
         <tw-button @click="logout" class="contained sm light">
@@ -71,6 +75,7 @@
         EVERYONE
       </tw-button>
     </div>
+    <footer>tweetly &copy; {{ moment().format("YYYY") }}</footer>
   </div>
 </template>
 

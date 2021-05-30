@@ -13,6 +13,7 @@
     </div>
     <div class="follow-btn">
       <tw-button
+        v-if="$route.params.id !== $store.state.user.id"
         :class="followed ? 'contained light' : 'contained'"
         @click="followed ? unfollow() : follow()"
       >

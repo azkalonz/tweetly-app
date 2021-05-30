@@ -59,6 +59,23 @@ const store = new Vuex.Store({
     }
   },
   actions: {
+    SAVE_USER({ state, commit }, user) {
+      axios
+        .post(
+          "/update-user",
+          { ...state.user, ...user },
+          {
+            headers: {
+              "Content-Type": "application/json"
+            }
+          }
+        )
+        .then(({ data }) => {
+          if (data.id) {
+            commit("SET_USER", data);
+          }
+        });
+    },
     DELETE_POST({ state }, post) {
       if (post && post.id) {
         axios.delete(`/delete-post/${post.id}`).then(({ data }) => {

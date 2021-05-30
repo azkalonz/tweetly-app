@@ -31,6 +31,17 @@ body {
   }
 }
 
+header {
+  padding: 30px 0;
+}
+
+footer {
+  width: 100%;
+  color: $grey-1;
+  text-align: center;
+  margin: 70px 0;
+}
+
 .w-100 {
   width: 100%;
 }
@@ -174,6 +185,7 @@ h3 {
     display: block;
     margin-bottom: 13px;
     pointer-events: none;
+    text-transform: capitalize;
   }
   .tw-input {
     font-size: 1.4rem;
@@ -290,4 +302,11 @@ hr {
 
 a {
   cursor: pointer;
+}
+
+.account-page-container {
+  background-color: $primary-lightest;
+  border: 1px solid $primary-lighter;
+  padding: 50px 34px;
+  border-radius: 7px;
 }

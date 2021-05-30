@@ -5,6 +5,7 @@ import Landing from "../views/Landing.vue";
 import Login from "../views/Login.vue";
 import Register from "../views/Register.vue";
 import Profile from "../views/Profile.vue";
+import Account from "../views/Account.vue";
 
 Vue.use(VueRouter);
 
@@ -23,6 +24,16 @@ const routes = [
     path: "/profile/:id",
     name: "Profile",
     component: Profile,
+    meta: {
+      transition: {
+        name: "fade"
+      }
+    }
+  },
+  {
+    path: "/account",
+    name: "Account",
+    component: Account,
     meta: {
       transition: {
         name: "fade"

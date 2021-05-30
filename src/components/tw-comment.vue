@@ -14,9 +14,7 @@
       >Delete</tw-button
     >
     <br />
-    <p class="message">
-      {{ comment.message }}
-    </p>
+    <p class="message" v-html="comment.message" />
   </div>
 </template>
 

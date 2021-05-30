@@ -25,6 +25,12 @@ export default {
     if (this.$refs["inputRef"].value.length > 0) this.focus();
     else this.blur();
   },
+  watch: {
+    value: function (val) {
+      if (val.length > 0) this.focus();
+      else this.blur();
+    },
+  },
   computed: {
     inputVal: {
       get() {
