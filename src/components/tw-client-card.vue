@@ -11,13 +11,21 @@
         >
       </div>
     </div>
-    <div class="follow-btn">
+    <div class="follow-btn flex aic">
       <tw-button
         v-if="$route.params.id !== $store.state.user.id"
         :class="followed ? 'contained light' : 'contained'"
         @click="followed ? unfollow() : follow()"
       >
         {{ followed ? "following" : "follow" }}
+      </tw-button>
+      &nbsp;
+      <tw-button
+        v-if="$store.state.user.role === 'ADMIN'"
+        :class="banned ? 'contained light' : 'outlined light'"
+        @click="banned ? unban() : banuser()"
+      >
+        {{ banned ? "Banned" : "Ban" }}
       </tw-button>
     </div>
   </div>
@@ -30,6 +38,7 @@ export default {
   data() {
     return {
       followed: false,
+      banned: false,
     };
   },
   props: {
@@ -44,6 +53,7 @@ export default {
   },
   mounted: function () {
     this.updateFollowingStatus();
+    this.banned = this.client.banned;
   },
   watch: {
     "$store.state.user.following": function () {
@@ -51,6 +61,16 @@ export default {
     },
   },
   methods: {
+    banuser() {
+      axios.post("/ban/" + this.client.id).then(({ data }) => {
+        this.banned = true;
+      });
+    },
+    unban() {
+      axios.post("/unban/" + this.client.id).then(({ data }) => {
+        this.banned = false;
+      });
+    },
     updateFollowingStatus() {
       this.followed =
         this.$store.state.user.following.findIndex(

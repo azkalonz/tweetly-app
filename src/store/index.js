@@ -178,6 +178,11 @@ const store = new Vuex.Store({
         return axios
           .post(`/login?email=${user.email}&password=${user.password}`)
           .then(({ data = {} }) => {
+            if (data.banned === true) {
+              alert("You are Banned!");
+              commit("SET_LOADING", false);
+              return;
+            }
             if (!data.id) {
               commit("SET_LOADING", false);
               return {
