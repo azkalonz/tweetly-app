@@ -21,11 +21,15 @@
     </div>
     <br />
     <div class="flex w-100">
-      <tw-button class="contained light f1" style="margin-right: 6px">
+      <tw-button
+        class="contained light f1"
+        style="margin-right: 6px"
+        @click="$router.push('/followers')"
+      >
         {{ followers }}<br />
         followers
       </tw-button>
-      <tw-button class="contained light f1">
+      <tw-button class="contained light f1" @click="$router.push('/follow')">
         {{ following }}<br />
         following
       </tw-button>

@@ -54,12 +54,12 @@ export default {
     updateFollowingStatus() {
       this.followed =
         this.$store.state.user.following.findIndex(
-          (q) => q.id === this.$route.params.id
+          (q) => q.id === this.client.id
         ) >= 0;
     },
     unfollow() {
       axios
-        .post(`/unfollow/${this.$route.params.id}/${this.$store.state.user.id}`)
+        .post(`/unfollow/${this.client.id}/${this.$store.state.user.id}`)
         .then(({ data }) => {
           if (data && data.id) {
             this.client.followers -= 1;
@@ -69,7 +69,7 @@ export default {
     },
     follow() {
       axios
-        .post(`/follow/${this.$route.params.id}/${this.$store.state.user.id}`)
+        .post(`/follow/${this.client.id}/${this.$store.state.user.id}`)
         .then(({ data }) => {
           if (data && data.id) {
             this.client.followers += 1;
