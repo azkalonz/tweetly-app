@@ -15,7 +15,8 @@ const components = [
   "tw-comment-input",
   "tw-client-card",
   "tw-modal",
-  "tw-report"
+  "tw-report",
+  "tw-card"
 ];
 
 export default {

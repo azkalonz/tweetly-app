@@ -367,3 +367,17 @@ a {
     margin-bottom: 0px;
   }
 }
+
+.tw-card {
+  background-color: $primary-lightest;
+  border: 1px solid $primary-lighter;
+  padding: 18px;
+  border-radius: 7px;
+  margin-bottom: 13px;
+  h2 {
+    color: $primary;
+  }
+  h3 {
+    color: $grey-0;
+  }
+}

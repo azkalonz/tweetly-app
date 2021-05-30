@@ -1,7 +1,12 @@
 <template>
   <div class="tw-client-card flex aic jcc">
     <div class="name flex column aic jcc w-100">
-      <h3>{{ client.lastName + ", " + client.firstName }}</h3>
+      <h3
+        @click="$router.push('/profile/' + client.id)"
+        style="cursor: pointer"
+      >
+        {{ client.lastName + ", " + client.firstName }}
+      </h3>
       <div class="flex jcsb">
         <span
           >{{ _.uniqBy(client.followers, (e) => e.id).length }} followers</span
