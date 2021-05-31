@@ -10,6 +10,8 @@ import Follow from "../views/Follow.vue";
 import Followers from "../views/Followers.vue";
 import Reports from "../views/Reports.vue";
 import Users from "../views/Users.vue";
+import Requests from "../views/Requests.vue";
+import Banned from "../views/Banned.vue";
 
 Vue.use(VueRouter);
 
@@ -18,6 +20,26 @@ const routes = [
     path: "/",
     name: "Home",
     component: Home,
+    meta: {
+      transition: {
+        name: "fade"
+      }
+    }
+  },
+  {
+    path: "/requests",
+    name: "Requests",
+    component: Requests,
+    meta: {
+      transition: {
+        name: "fade"
+      }
+    }
+  },
+  {
+    path: "/banned",
+    name: "Banned",
+    component: Banned,
     meta: {
       transition: {
         name: "fade"

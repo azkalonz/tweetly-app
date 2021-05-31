@@ -1,6 +1,13 @@
 <template>
   <div class="tw-client-card flex aic jcc">
     <div class="name flex column aic jcc w-100">
+      <div
+        v-if="client.image !== null"
+        class="image-container"
+        style="width: 200px; height: 200px"
+      >
+        <img :src="client.image" />
+      </div>
       <h3
         @click="$router.push('/profile/' + client.id)"
         style="cursor: pointer"

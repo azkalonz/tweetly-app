@@ -24,7 +24,8 @@ export default {
       this.$route.path === "/landing" ||
       this.$route.path === "/login"
     ) {
-      this.$router.replace("/");
+      if (!this.$store.state.user.banned) this.$router.replace("/");
+      else this.$router.replace("/banned");
     }
   },
   watch: {

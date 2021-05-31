@@ -2,6 +2,7 @@
   <div class="account-page-container">
     <h3>Account Settings</h3>
     <br />
+    <input type="file" ref="profilepic" />
     <tw-input
       v-for="(field, index) in Object.keys(data)"
       :key="index"
@@ -23,6 +24,14 @@
 </template>
 
 <script>
+const toBase64 = (file) =>
+  new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = (error) => reject(error);
+  });
+
 export default {
   data() {
     return {
@@ -42,7 +51,11 @@ export default {
   },
   methods: {
     save() {
-      this.$store.dispatch("SAVE_USER", this.data);
+      const file = this.$refs["profilepic"].files[0];
+      toBase64(file).then((image) => {
+        this.data.image = image;
+        this.$store.dispatch("SAVE_USER", this.data);
+      });
     },
   },
 };

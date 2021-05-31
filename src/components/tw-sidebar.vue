@@ -2,6 +2,9 @@
   <div class="tw-sidebar-container">
     <div class="flex jcsb aic">
       <div>
+        <div class="image-container">
+          <img :src="$store.state.user.image" />
+        </div>
         <h3>
           {{ clientName }}
         </h3>
@@ -40,6 +43,14 @@
     <div class="flex column aiss w-100">
       <tw-button
         v-if="$store.state.user.role === 'ADMIN'"
+        @click="$router.push('/requests')"
+        class="contained"
+      >
+        REQUESTS
+      </tw-button>
+      <br />
+      <tw-button
+        v-if="$store.state.user.role === 'ADMIN'"
         @click="$router.push('/users')"
         class="contained"
       >
@@ -53,46 +64,50 @@
         REPORTS
       </tw-button>
       <br />
-      <tw-button
-        @click="yours"
-        :class="
-          ['f1', 'light']
-            .concat([
-              $store.state.visiblePosts === 'YOURS' ? 'contained' : 'outlined',
-            ])
-            .join(' ')
-        "
-      >
-        Yours
-      </tw-button>
-      <br />
-      <tw-button
-        @click="notYours"
-        :class="
-          ['f1', 'light']
-            .concat([
-              $store.state.visiblePosts === 'FOLLOWING'
-                ? 'contained'
-                : 'outlined',
-            ])
-            .join(' ')
-        "
-      >
-        Following
-      </tw-button>
-      <br />
-      <tw-button
-        @click="all"
-        :class="
-          ['f1', 'light']
-            .concat([
-              $store.state.visiblePosts === 'ALL' ? 'contained' : 'outlined',
-            ])
-            .join(' ')
-        "
-      >
-        EVERYONE
-      </tw-button>
+      <template v-if="!$store.state.user.banned">
+        <tw-button
+          @click="yours"
+          :class="
+            ['f1', 'light']
+              .concat([
+                $store.state.visiblePosts === 'YOURS'
+                  ? 'contained'
+                  : 'outlined',
+              ])
+              .join(' ')
+          "
+        >
+          Yours
+        </tw-button>
+        <br />
+        <tw-button
+          @click="notYours"
+          :class="
+            ['f1', 'light']
+              .concat([
+                $store.state.visiblePosts === 'FOLLOWING'
+                  ? 'contained'
+                  : 'outlined',
+              ])
+              .join(' ')
+          "
+        >
+          Following
+        </tw-button>
+        <br />
+        <tw-button
+          @click="all"
+          :class="
+            ['f1', 'light']
+              .concat([
+                $store.state.visiblePosts === 'ALL' ? 'contained' : 'outlined',
+              ])
+              .join(' ')
+          "
+        >
+          EVERYONE
+        </tw-button>
+      </template>
     </div>
     <footer>tweetly &copy; {{ moment().format("YYYY") }}</footer>
   </div>

@@ -381,3 +381,17 @@ a {
     color: $grey-0;
   }
 }
+
+.image-container {
+  width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 8px;
+  img {
+    width: auto !important;
+    height: 100% !important;
+  }
+}

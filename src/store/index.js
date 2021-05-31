@@ -14,10 +14,15 @@ const store = new Vuex.Store({
     isLoading: false,
     visiblePosts: "FOLLOWING",
     posts: [],
+    bannedUserPosts: [],
     isTweeting: false,
-    modal: { isOpen: false }
+    modal: { isOpen: false },
+    search: ""
   },
   mutations: {
+    SET_SEARCH(state, search) {
+      state.search = search;
+    },
     OPEN_MODAL(state, meta) {
       state.modal = { ...meta, isOpen: true };
     },
@@ -114,6 +119,7 @@ const store = new Vuex.Store({
     GET_POSTS({ state }, callback = data => {}) {
       axios.get("/posts").then(({ data }) => {
         state.posts = data.reverse();
+        state.bannedUserPosts = data.filter(q => q.author.banned === true);
         callback(
           data.map(q => ({
             ...q,
@@ -128,6 +134,19 @@ const store = new Vuex.Store({
     REGISTER({ commit }, user) {
       const errors = {};
       commit("SET_LOADING", true);
+
+      if (/\d/.test(user.firstName)) {
+        errors.firstName = {
+          message: "Invalid character"
+        };
+      }
+
+      if (/\d/.test(user.lastName)) {
+        errors.lastName = {
+          message: "Invalid character"
+        };
+      }
+
       if (_.isNil(user.firstName) || _.isEmpty(user.firstName)) {
         errors.firstName = {
           message: "Invalid first name"
@@ -178,11 +197,6 @@ const store = new Vuex.Store({
         return axios
           .post(`/login?email=${user.email}&password=${user.password}`)
           .then(({ data = {} }) => {
-            if (data.banned === true) {
-              alert("You are Banned!");
-              commit("SET_LOADING", false);
-              return;
-            }
             if (!data.id) {
               commit("SET_LOADING", false);
               return {
@@ -195,7 +209,7 @@ const store = new Vuex.Store({
             } else {
               commit("SET_LOADING", false);
               commit("SET_USER", data);
-              return data;
+              return { data, errors };
             }
           });
       } else {

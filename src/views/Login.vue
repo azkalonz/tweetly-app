@@ -59,12 +59,13 @@ export default {
         password: this.password,
       };
       this.errors = {};
-      this.$store.dispatch("LOGIN", user).then(({ errors = null }) => {
-        if (errors) {
+      this.$store.dispatch("LOGIN", user).then(({ errors = null, data }) => {
+        if (Object.keys(errors).length) {
           this.errors = errors;
           return;
         } else {
-          this.$router.replace("/");
+          if (!data.banned) this.$router.replace("/");
+          else this.$router.replace("/banned");
         }
       });
     },

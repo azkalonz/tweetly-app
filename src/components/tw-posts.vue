@@ -4,11 +4,17 @@
       <h3 class="grey">No Avaiable Posts</h3>
     </div>
     <article class="tw-post-container" v-for="post in posts" :key="post.id">
-      <section class="flex jcsb w-100">
+      <section class="flex jcsb w-100 aic">
         <div>
-          <a @click="visitProfile(post.author.id)" class="author">{{
-            post.author.firstName + " " + post.author.lastName
-          }}</a>
+          <div class="flex aic jcsb">
+            <div class="image-container" style="width: 40px; height: 40px">
+              <img :src="post.author.image" />
+            </div>
+            &nbsp;&nbsp;
+            <a @click="visitProfile(post.author.id)" class="author">{{
+              post.author.firstName + " " + post.author.lastName
+            }}</a>
+          </div>
           <span class="date">{{ moment(post.date).fromNow() }}</span>
         </div>
         <tw-button
@@ -71,6 +77,10 @@ export default {
     profileId: {
       required: false,
     },
+    viewBannedPosts: {
+      required: false,
+      default: false,
+    },
   },
   data() {
     return {
@@ -119,17 +129,25 @@ export default {
       if (!posts) {
         posts = this.originalPosts;
       }
-      return this.originalPosts.filter((q) =>
-        visible === "YOURS"
-          ? q.author.id === this.$store.state.user.id
-          : visible === "FOLLOWING"
-          ? this.$store.state.user.following.findIndex(
-              (qq) => qq.id === q.author.id
-            ) >= 0
-          : visible === "ALL"
-          ? true
-          : this.profileId === q.author.id
-      );
+      return this.originalPosts
+        .filter((q) =>
+          visible === "YOURS"
+            ? q.author.id === this.$store.state.user.id
+            : visible === "FOLLOWING"
+            ? this.$store.state.user.following.findIndex(
+                (qq) => qq.id === q.author.id
+              ) >= 0
+            : visible === "ALL"
+            ? true
+            : this.profileId === q.author.id
+        )
+        .filter((q) => (this.viewBannedPosts ? q.author.banned === true : true))
+        .filter(
+          (q) =>
+            JSON.stringify(q)
+              .toLowerCase()
+              .indexOf(this.$store.state.search.toLowerCase()) >= 0
+        );
     },
     deletePost(post) {
       this.$store.commit("OPEN_MODAL", {
